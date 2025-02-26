@@ -5,7 +5,7 @@ function setup() {
     circle(200,200,400)
 }
 function draw() {
-    
+    setting1
 
 }
 class Ball {
