@@ -14,7 +14,7 @@ function setup() {
 }
 function draw() {
     background('black');
-    fill('yellow');
+    fill('purple');
     circle(vw/2,vh/2,400);
     //ball1 = new Ball(x=mouseX,y=mouseY,radius=25);
     //allBalls.push(ball1); 
@@ -26,7 +26,13 @@ function draw() {
     //    j.display();
     //}
 
-
+    for (let i = 0; i < allBalls.length; i++) {
+        //allBalls[i].newRadius();
+        allBalls[i].display();
+    }
+    //if (allBalls.length>0) {
+    //allBalls[0].display();
+    //}
     textFont(font);
     //textSize(32);
     let str1 = allBalls.length;
@@ -46,7 +52,7 @@ class Ball {
     }
 
     display() {
-        fill('red')
+        fill('white')
         noStroke();
         ellipse(this.x,this.y,this.radius,this.radius);
         
@@ -54,12 +60,15 @@ class Ball {
         
     
     }
+    newRadius(i) {
+        this.radius=this.radius-1
+    }
+
     //move() {}
 }
 
 function mousePressed() {
-    let newball = new Ball(mouseX, mouseY, 80);
-    newball.display();
+    let newball = new Ball(mouseX, mouseY, 40);
     allBalls.push(newball);
 
     
