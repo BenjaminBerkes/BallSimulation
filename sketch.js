@@ -1,3 +1,8 @@
+allBalls = [];
+
+let font = "Monocraft";
+
+
 function setup() {
     vh=windowHeight;
     vw=windowWidth;
@@ -5,38 +10,57 @@ function setup() {
     canvas.parent('canvas-container');
     
     
+    
 }
 function draw() {
     background('black');
-    fill('purple');
-    circle(vw/2,vh/2,400); 
+    fill('yellow');
+    circle(vw/2,vh/2,400);
+    //ball1 = new Ball(x=mouseX,y=mouseY,radius=25);
+    //allBalls.push(ball1); 
     // creates circle in with half the values
     // of viewport width and height so that
     // it will always be centered
-    ball1 = new Ball(mouseX,mouseY)
-    ball1.display()
+    //for (let i=0; i < allBalls.length; i++) {
+    //    j = new Ball(mouseX,mouseY,35);
+    //    j.display();
+    //}
 
+
+    textFont(font);
+    //textSize(32);
+    let str1 = allBalls.length;
+    text("ball/object counter: "+str1.toString(), 100, 100)
+    
 }
 
 class Boundary {}
 
 class Ball {
-    constructor(x,y) {
+    constructor(x,y, radius) {
     this.x=x;
     this.y=y;
     this.pos=createVector(x,y);
     //this.vel=p5.vector.random2D().mult(2);
-    this.radius=100;
+    this.radius=radius;
     }
 
     display() {
-        fill('white')
+        fill('red')
         noStroke();
-        ellipse(this.x,this.y,100,100)
+        ellipse(this.x,this.y,this.radius,this.radius);
+        
+        
+        
+    
     }
-    move() {}
+    //move() {}
 }
 
 function mousePressed() {
-    let ball = new Ball(mouseX, mouseY)
+    let newball = new Ball(mouseX, mouseY, 80);
+    newball.display();
+    allBalls.push(newball);
+
+    
 }
