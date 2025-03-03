@@ -3,7 +3,7 @@ textColor = "purple";
 boundaryColor = "purple";
 let font = "Monocraft";
 boundarydiameter = 400;
-
+smallBallDiameter = 40;
 function setup() {
     vh=windowHeight;
     vw=windowWidth;
@@ -58,7 +58,6 @@ class Ball {
     }
 
     display() {
-        
         fill('white')
         noStroke();
         ellipse(this.x,this.y,this.radius,this.radius);
@@ -75,12 +74,12 @@ class Ball {
     //Math.sqrt((((vw/2)-mouseX)**2)+(((vh/2)-mouseY)**2))
 
 function mousePressed() {
-    if ((boundarydiameter/2)>Math.sqrt((((vw/2)-mouseX)**2)+(((vh/2)-mouseY)**2))) {
+    if ((boundarydiameter/2)>(smallBallDiameter/2)+Math.sqrt((((vw/2)-mouseX)**2)+(((vh/2)-mouseY)**2))) {
         // if the distance is less than the 
         // diameter/2 AKA radius then the
         // new instance of ball is allowed
         // to be created
-        let newball = new Ball(mouseX, mouseY, 40);
+        let newball = new Ball(mouseX, mouseY, smallBallDiameter);
         allBalls.push(newball);
     }
     
