@@ -4,9 +4,9 @@ boundaryColor = "orange";
 let font = "Monocraft";
 boundarydiameter = 400;
 balldiameter = 40;
-
+frameBuff=24
 function setup() {
-    frameRate(24)
+    frameRate(frameBuff)
     vh=windowHeight;
     vw=windowWidth;
     let canvas = createCanvas(vw,vh);
@@ -58,13 +58,19 @@ class Ball {
     
 
     move() {
-        this.vel.add(gravityvector);
-        this.pos.add(this.vel);
-        if ((boundarydiameter/2)<(balldiameter/2)+Math.sqrt((((vw/2)-this.pos.x)**2)+(((vh/2)-this.pos.y)**2))) {
+        
+        
+        if ((boundarydiameter/2)>(balldiameter/2)+Math.sqrt((((vw/2)-this.pos.x)**2)+(((vh/2)-this.pos.y)**2))-1) {
+            this.vel.add(gravityvector);
+            this.pos.add(this.vel);
 
-            this.vel.mult(1,-1);
+            
+        }
+        if ((boundarydiameter/2)<(balldiameter/2)+Math.sqrt((((vw/2)-this.pos.x)**2)+(((vh/2)-this.pos.y)**2))) {
+            this.vel.mult(1,-0.87);
             this.pos.add(this.vel);
         }
+
 
         
         
