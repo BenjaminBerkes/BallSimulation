@@ -1,6 +1,6 @@
 allBalls = [];
-textColor = "orange";
-boundaryColor = "orange";
+textColor = "red";
+boundaryColor = "red";
 let font = "Monocraft";
 boundarydiameter = 400;
 boundaryradius = boundarydiameter/2;
