@@ -24,7 +24,7 @@ function draw() {
     displayText();     
     //ball1 = new Ball(x=mouseX,y=mouseY,radius=25); allBalls.push(ball1); //uncomment this if you want the balls to spawn on mouse forever
     updateBalls();
-    displayBalls();    
+    displayBalls();
     //displays through a for loop
 }
 
@@ -38,27 +38,45 @@ class Ball {
     this.y=mouseY;
     this.pos=createVector(mouseX,mouseY);
     this.vel=createVector(0,0);
-    this.radius=balldiameter;
+    this.radius=ballradius;
     }
     
 
     move() {
         if (keyIsPressed && key == 'w') {
             
-            this.pos.add(0,-5)
+            this.vel.add(0,-0.5)
         }
 
-        let normalVector = createVector();
-        let normalAngle = atan2();
-        let velocityAngle = atan2();
-        let deflectionAngle = atan2();
-        let speed = this.vel.mag();
+        this.vel.add(gravityvector);
+        this.pos.add(this.vel);
 
-        let distFromCenter = Math.sqrt(((centerX-this.pos.x)**2)+((centerY-this.pos.y)**2));
+        let dx = this.pos.x - centerX;
+        let dy = this.pos.y - centerY;
+        let distFromCenter = Math.sqrt(dx*dx + dy*dy);
+
+        if (distFromCenter + this.radius > boundaryradius) {
+            
+            
+            let normal = createVector(dx, dy).normalize();
+
+            this.pos = p5.Vector.add(
+                createVector(centerX, centerY),
+                normal.copy().mult(boundaryradius - this.radius)
+            );
+
+            let vDotN = this.vel.dot(normal);
+            let reflected = p5.Vector.sub(this.vel, p5.Vector.mult(normal, 2 * vDotN));
+            this.vel = reflected.mult(0.87);
+
+            
+            if (this.vel.mag() < 0.2) {
+                this.vel.set(0, 0);
+            }
+        }
         
         //if (boundaryradius>ballradius+Math.sqrt(((centerX-this.pos.x)**2)+((centerY-this.pos.y)**2))+2) {
-            this.vel.add(gravityvector);
-            this.pos.add(this.vel);
+
         //}
         if (boundaryradius<(ballradius+Math.sqrt(((centerX-this.pos.x)**2)+((centerY-this.pos.y)**2)))) {
             this.vel.mult(1,-0.87);
@@ -71,10 +89,10 @@ class Ball {
     }
 
     display() {
-        stroke('white');
-        strokeWeight(this.radius);
+        noStroke();
+        fill('white');
+        ellipse(this.pos.x, this.pos.y, this.radius*2, this.radius*2);
         console.log(this.pos);
-        point(this.pos);
     }
     
 
