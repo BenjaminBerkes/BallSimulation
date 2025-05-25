@@ -25,6 +25,7 @@ function draw() {
     //ball1 = new Ball(x=mouseX,y=mouseY,radius=25); allBalls.push(ball1); //uncomment this if you want the balls to spawn on mouse forever
     updateBalls();
     displayBalls();    
+    //displays through a for loop
 }
 
 class Boundary {
